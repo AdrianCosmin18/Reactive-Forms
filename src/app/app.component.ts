@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -7,17 +7,34 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  registrationForm = new FormGroup({
-    userName: new FormControl('Cosmin'),
-    password: new FormControl(''),
-    confirmPassword: new FormControl(''),
-    address: new FormGroup({
-      city: new FormControl(''),
-      state: new FormControl(''),
-      postalCode: new FormControl('')
+  // registrationForm = new FormGroup({
+  //   userName: new FormControl('Cosmin'),
+  //   password: new FormControl(''),
+  //   confirmPassword: new FormControl(''),
+  //   address: new FormGroup({
+  //     city: new FormControl(''),
+  //     state: new FormControl(''),
+  //     postalCode: new FormControl('')
+  //   })
+  // });
+
+  public get userName() {
+    return this.registrationForm.get('userName');
+  }
+
+  constructor(private formBuilder: FormBuilder) {}
+
+  //form builder-ul este un altfel de mod de a crea form grups/control
+  public registrationForm = this.formBuilder.group({
+    userName: ['', [Validators.required, Validators.minLength(3)]],
+    password: [''],
+    confirmPassword: [""],
+    address: this.formBuilder.group({
+      city: [""],
+      state: [""],
+      postalCode: ['']
     })
-  });
-  title = 'reactive-forms';
+  })
 
   loadApiData(){
     this.registrationForm.setValue({// completam total fromul
