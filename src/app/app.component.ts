@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {forbiddenNameValidator, forbiddenNameValidator2} from "./shared/user-name.validator";
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,7 @@ export class AppComponent {
 
   //form builder-ul este un altfel de mod de a crea form grups/control
   public registrationForm = this.formBuilder.group({
-    userName: ['', [Validators.required, Validators.minLength(3)]],
+    userName: ['', [Validators.required, Validators.minLength(3), forbiddenNameValidator2(/password/)]],
     password: [''],
     confirmPassword: [""],
     address: this.formBuilder.group({
