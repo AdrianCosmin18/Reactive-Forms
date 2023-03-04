@@ -3,8 +3,8 @@
   <form [formGroup]="registrationForm">
 
     {{registrationForm.value | json}}
-
-    <div class="form-group" >
+                                  <!--add pt a merge but de submit-->
+    <div class="form-group" (ngSubmit)="onSubmit($event)">
       <label>Username</label>
       <input [ngClass]="userName?.invalid && userName?.touched ? 'is-invalid' : ''" formControlName="userName"
         type="text" class="form-control">
@@ -61,8 +61,8 @@
         <input formControlName="postalCode" type="text" class="form-control">
       </div>
     </div>
-
-    <button class="btn btn-primary" type="submit">Register</button>
+                                                  <!--add pt a merge but de submit-->
+    <button class="btn btn-primary" type="submit" (click)="onSubmit($event)">Register</button>
     <button class="btn btn-secondary ml-2" type="button" (click)="loadApiData2()">Load API Data</button>
   </form>
 
