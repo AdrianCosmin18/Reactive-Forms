@@ -1,8 +1,6 @@
 <div class="container-fluid">
   <h2>Registration Form</h2>
-  <form [formGroup]="this.registrationForm">
-
-    {{registrationForm.value | json}}
+  <form [formGroup]="registrationForm">
 
     <div class="form-group">
       <label>Username</label>
@@ -16,6 +14,18 @@
           class="text-danger">{{userName?.errors?.['forbiddenName'].value}} as Username not allowed</small>
       </div>
     </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input [ngClass]="email?.invalid && email?.touched ? 'is-invalid': ''" formControlName="email" type="email" class="form-control">
+      <small class="text-danger" [ngClass]="email?.valid || email?.untouched ? 'd-none' : ''">Email is invalid</small>
+    </div>
+
+    <div class="form-check mb-3">
+      <input type="checkbox" class="form-check-input" formControlName="subscribe">
+      <label class="form-check-label">Send me offers</label>
+    </div>
+
 
     <div class="form-group">
       <label>Password</label>
