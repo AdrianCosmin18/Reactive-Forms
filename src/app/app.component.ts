@@ -104,5 +104,13 @@ export class AppComponent implements OnInit{
     });
   }
 
-
+  onSubmit(event: Event){
+    event.preventDefault();//adaugat pt a merge butonul de submit
+    console.log("salut");
+    if(this.registrationForm.valid){
+      console.log(this.registrationForm.value);
+    }else{
+      console.log("invalid form")
+    }
+  }
 }
