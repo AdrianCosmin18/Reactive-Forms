@@ -2,7 +2,9 @@
   <h2>Registration Form</h2>
   <form [formGroup]="registrationForm">
 
-    <div class="form-group">
+    {{registrationForm.value | json}}
+
+    <div class="form-group" >
       <label>Username</label>
       <input [ngClass]="userName?.invalid && userName?.touched ? 'is-invalid' : ''" formControlName="userName"
         type="text" class="form-control">
@@ -17,8 +19,12 @@
 
     <div class="form-group">
       <label>Email</label>
+      <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addAlternateEmail()">Add email</button>
       <input [ngClass]="email?.invalid && email?.touched ? 'is-invalid': ''" formControlName="email" type="email" class="form-control">
       <small class="text-danger" [ngClass]="email?.valid || email?.untouched ? 'd-none' : ''">Email is invalid</small>
+      <div formArrayName="alternateEmails" *ngFor="let email of alternateEmails.controls; let i = index">
+        <input type="text" class="form-control my-1" [formControlName]="i"><!--legam cu index ca sa stim in care input scriem-->
+      </div>
     </div>
 
     <div class="form-check mb-3">
